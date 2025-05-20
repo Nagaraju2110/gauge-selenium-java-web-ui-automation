@@ -22,9 +22,18 @@
     </properties>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <encoding>UTF-8</encoding>
+            </resource>
+        </resources>
         <testResources>
             <testResource>
                 <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+                <encoding>UTF-8</encoding>
             </testResource>
         </testResources>
         <pluginManagement>
