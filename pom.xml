@@ -36,6 +36,13 @@
                 <encoding>UTF-8</encoding>
             </testResource>
         </testResources>
+
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+            </testResource>
+        </testResources>
+
         <pluginManagement>
             <plugins>
                 <plugin>
