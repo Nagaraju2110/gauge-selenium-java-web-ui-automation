@@ -1,9 +1,5 @@
-FROM getgauge/gauge-java
-
-WORKDIR /usr/src/app
-
-COPY . .
-
-RUN ./mvnw install || mvn install
-
-CMD ["gauge", "run", "specs"]
+FROM openjdk:17-jdk-slim
+WORKDIR /app
+COPY target/*.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app.jar"]
