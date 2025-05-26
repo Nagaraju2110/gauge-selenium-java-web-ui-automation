@@ -1,20 +1,9 @@
-# Base Gauge + Java
 FROM getgauge/gauge-java
 
-# Install Chrome and dependencies
-RUN apt-get update && \
-    apt-get install -y wget gnupg unzip curl xvfb && \
-    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
-    dpkg -i google-chrome-stable_current_amd64.deb || apt-get -f install -y
-
-# Set display for headless tests
-ENV DISPLAY=:99
-
-# Set workdir and copy files
 WORKDIR /usr/src/app
+
 COPY . .
 
-# Install Maven dependencies
 RUN ./mvnw install || mvn install
 
 CMD ["gauge", "run", "specs"]
