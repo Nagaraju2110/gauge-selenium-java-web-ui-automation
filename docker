@@ -1,5 +1,20 @@
-FROM openjdk:17-jdk-slim
-WORKDIR /app
-COPY target/*.jar app.jar
-EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Use an official Java image as a base
+FROM openjdk:17-slim
+
+# Install dependencies
+RUN apt-get update && apt-get install -y curl unzip wget git \
+    && curl -SsL https://downloads.gauge.org/stable | sh \
+    && gauge install java \
+    && apt-get clean
+
+# Set working directory
+WORKDIR /usr/src/app
+
+# Copy your project files into the container
+COPY . .
+
+# Run Maven build
+RUN ./mvnw clean package -DskipTests
+
+# Run Gauge specs (Optional as default CMD)
+CMD ["gauge", "run", "specs"]
